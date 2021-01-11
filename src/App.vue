@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <v-bottom-navigation v-model="value" absolute grow height=59 background-color=#c9d8e4 color= #6facd9>
+    <v-bottom-navigation class="uselectable" v-model="value" absolute grow height=59 background-color=#c9d8e4 color= #6facd9>
       <v-btn @click="push('/calendar')" icon>
         <v-icon>{{ calendarMonthOutlinePath }}</v-icon>
       </v-btn>
