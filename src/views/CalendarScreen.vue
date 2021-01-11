@@ -1,8 +1,8 @@
 <template>
-  <view class="container">
-    <text class="heading">Calendar</text>
-    <text>This is the Calendar screen</text>
-  </view>
+  <div class="container">
+    <p class="heading">Calendar</p>
+    <p>This is the Calendar screen</p>
+  </div>
 </template>
 
 <script>

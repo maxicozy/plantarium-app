@@ -5,6 +5,15 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
+Vue.mixin({
+  methods: {
+    push: function (route) {
+      if (route === this.$route.path) return;
+      router.push(route);
+    }
+  }
+});
+
 new Vue({
   router,
   vuetify,

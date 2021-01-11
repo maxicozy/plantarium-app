@@ -1,8 +1,8 @@
 <template>
-  <view class="container">
-    <text class="heading">Settings</text>
-    <text>This is the App Settings screen</text>
-  </view>
+  <div class="container">
+    <p class="heading">Settings</p>
+    <p>This is the App Settings screen</p>
+  </div>
 </template>
 
 <script>
