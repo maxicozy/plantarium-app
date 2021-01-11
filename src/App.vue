@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <router-view />
-    <v-bottom-navigation class="uselectable" v-model="value" absolute grow height=59 background-color=#c9d8e4 color= #6facd9>
-      <v-btn @click="push('/calendar')" icon>
+    <v-bottom-navigation v-model="value" absolute grow height=59 background-color=#c9d8e4 color= #6facd9>
+      <v-btn class="uselectable" @click="push('/calendar')" icon>
         <v-icon>{{ calendarMonthOutlinePath }}</v-icon>
       </v-btn>
-      <v-btn @click="push('/')" icon>
+      <v-btn class="uselectable" @click="push('/')" icon>
         <v-icon>{{ sproutPath }}</v-icon>
       </v-btn>
-      <v-btn @click="push('/settings')" icon>
+      <v-btn class="uselectable" @click="push('/settings')" icon>
         <v-icon>{{ cogPath }}</v-icon>
       </v-btn>
     </v-bottom-navigation>
