@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <p>this is the plant screen</p>
-    <p>and max is cozy</p>
+    <p>this is the plant home screen</p>
   </div>
 </template>
 

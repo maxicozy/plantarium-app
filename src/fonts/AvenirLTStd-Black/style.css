@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'AvenirLTStd-Black';
+  src: url('/path-to/AvenirLTStd-Black.woff2') format('woff2'),
+       url('/path-to/AvenirLTStd-Black.woff') format('woff'),
+       url('/path-to/AvenirLTStd-Black.ttf')  format('truetype');
+}
+
+body {
+  font-family: 'AvenirLTStd-Black', sans-serif;
+}
