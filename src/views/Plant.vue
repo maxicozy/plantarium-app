@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <homebutton />
+  <div class="plant">
+    <homebutton :disabled="inHome" />
     <router-view />
   </div>
 </template>
@@ -12,10 +12,11 @@ export default {
   name: 'Plant',
   components: {
     Homebutton,
+  },
+  computed: {
+    inHome() {
+      return this.$route.path === '/'
+    }
   }
 }
 </script>
-
-<style scoped>
-
-</style>

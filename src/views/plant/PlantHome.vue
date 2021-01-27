@@ -9,7 +9,9 @@
 export default {
   name: 'Plant',
   components: {
-
   }
 }
 </script>
+
+<style scoped>
+</style>

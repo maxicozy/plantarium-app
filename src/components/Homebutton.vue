@@ -1,6 +1,6 @@
 <template>
   <div class="homebutton">
-    <v-btn disabled @click="push('/home')" elevation="0" max-height="32" max-width="32" dark>
+    <v-btn @click="push(to)" color="#6facd9" elevation="0" max-height="32" max-width="32" :disabled="disabled" dark>
       <v-icon class="icon" size="24" left>{{ homeVariantOutlinePath }}</v-icon>
     </v-btn>
   </div>
@@ -11,11 +11,20 @@ import { mdiHomeVariantOutline } from '@mdi/js';
 
 export default {
   name: 'Homebutton',
+  props: {
+    disabled: Boolean,
+  },
   data: () => ({
     homeVariantOutlinePath: mdiHomeVariantOutline,
   }),
   components: {
 
+  },
+  computed: {
+    to() {
+      const [parent] = this.$route.matched
+      return parent.path
+    }
   },
 }
 </script>
@@ -23,8 +32,10 @@ export default {
 <style scoped>
 .homebutton {
   margin: 9px 0px 0px 13px;
+  width: 32px;
   border-radius: 10px;
   text-align: left;
+  position: absolute;
 }
 .homebutton .v-btn:not(.v-btn--round).v-size--default {
   min-width: 0;

@@ -3,14 +3,8 @@
     <statusbar />
     <router-view />
     <v-bottom-navigation dark class="unselectable" :value="value" absolute grow height=59 background-color=#c9d8e4 color= #6facd9>
-      <v-btn @click="push('/calendar')" icon elevation="0">
-        <v-icon size="32">{{ calendarMonthPath }}</v-icon>
-      </v-btn>
-      <v-btn @click="push('/home')" icon elevation="0">
-        <v-icon size="32">{{ sproutPath }}</v-icon>
-      </v-btn>
-      <v-btn @click="push('/settings')" icon elevation="0">
-        <v-icon size="32">{{ cogPath }}</v-icon>
+      <v-btn v-for="(icon, path) in pages" :key="path" @click="push('/' + path)" icon elevation="0">
+        <v-icon size="32">{{ icon }}</v-icon>
       </v-btn>
     </v-bottom-navigation>
   </div>
@@ -21,12 +15,21 @@
   import Statusbar from './components/Statusbar.vue';
 
   export default {
+    name: "App",
     data: () => ({
-      value: 1,
-      sproutPath: mdiSprout,
-      cogPath: mdiCog,
-      calendarMonthPath: mdiCalendarMonth,
+      pages: {
+        calendar: mdiCalendarMonth,
+        '': mdiSprout,
+        settings: mdiCog,
+      }
     }),
+    computed: {
+      value() {
+        const [parent] = this.$route.matched
+        const current = parent?.path?.substring(1)
+        return Object.keys(this.pages).findIndex(k => k === current);
+      }
+    },
     components: {
       Statusbar,
     },
@@ -40,11 +43,12 @@
        url('./fonts/AvenirLTStd-Black.woff') format('woff'),
        url('./fonts/AvenirLTStd-Black.ttf')  format('truetype');
   }
-  
+
+  body {
+    background-color: #e5e5e5;
+  }
   #app {
     font-family: 'AvenirLTStd-Black', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
   }
@@ -63,5 +67,4 @@
     -webkit-box-sizing: border-box;
     border-bottom: 5px solid;
   }
-
 </style>
