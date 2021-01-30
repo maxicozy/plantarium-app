@@ -22,8 +22,8 @@ export default {
   },
   computed: {
     to() {
-      const [parent] = this.$route.matched
-      return parent.path
+      const [parent] = this.$route.matched;
+      return parent.path;
     }
   },
 }
@@ -31,7 +31,8 @@ export default {
 
 <style scoped>
 .homebutton {
-  margin: 9px 0px 0px 13px;
+  left: 13px;
+  top: 41px;
   width: 32px;
   border-radius: 10px;
   text-align: left;
@@ -47,6 +48,7 @@ export default {
 }
 .theme--dark.v-btn.v-btn--disabled.v-btn--has-bg {
   background-color: #c9d8e4 !important;
+  border-radius: 10px;
 }
 .theme--dark.v-btn.v-btn--disabled .v-icon {
   color: #ffffff !important;

@@ -2,7 +2,7 @@
   <div id="app">
     <statusbar />
     <router-view />
-    <v-bottom-navigation dark class="unselectable" :value="value" absolute grow height=59 background-color=#c9d8e4 color= #6facd9>
+    <v-bottom-navigation dark class="unselectable" :value="value" absolute grow height="51px" background-color=#c9d8e4 color= #6facd9>
       <v-btn v-for="(icon, path) in pages" :key="path" @click="push('/' + path)" icon elevation="0">
         <v-icon size="32">{{ icon }}</v-icon>
       </v-btn>
@@ -44,13 +44,60 @@
        url('./fonts/AvenirLTStd-Black.ttf')  format('truetype');
   }
 
+  @font-face {
+  font-family: 'AvenirLTStd-Medium';
+  src: url('./fonts/AvenirLTStd-Medium.woff2') format('woff2'),
+       url('./fonts/AvenirLTStd-Medium.woff') format('woff'),
+       url('./fonts/AvenirLTStd-Medium.ttf')  format('truetype');
+  }
+
+  @font-face {
+  font-family: 'AvenirLTStd-Light';
+  src: url('./fonts/AvenirLTStd-Light.woff2') format('woff2'),
+       url('./fonts/AvenirLTStd-Light.woff') format('woff'),
+       url('./fonts/AvenirLTStd-Light.ttf')  format('truetype');
+  }
+
   body {
     background-color: #e5e5e5;
   }
+
   #app {
     font-family: 'AvenirLTStd-Black', sans-serif;
     text-align: center;
-    color: #2c3e50;
+    color: #515151;
+  }
+
+  .headbar {
+    border-top-left-radius: 0.313rem;
+    border-top-right-radius: 0.313rem;
+    height: 2.438rem;
+    padding-bottom: 1rem;
+    text-align: left;
+  }
+
+  .title {
+    margin-top: 0.375rem;
+    color: #6facd9;
+    font-size: 2rem;
+    text-align: right;
+  }
+
+  .cardTitle {
+    font-family: 'AvenirLTStd-Medium', sans-serif;
+    font-size: 1.375rem;
+    color: #ffffff;
+  }
+
+  .text {
+    font-family: 'AvenirLTStd-Light', sans-serif;
+    font-size: 1.375rem;
+    text-align: left;
+  }
+
+  .info {
+    font-family: 'AvenirLTStd-Light', sans-serif;
+    font-size: 0.875rem;
   }
 
   .unselectable .theme--dark.v-btn:hover::before {
