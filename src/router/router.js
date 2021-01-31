@@ -6,16 +6,6 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    component: Plant,
-    children: [ 
-      {
-        path: '/',
-        component: () => import('../views/plant/PlantHome.vue'),
-      },
-    ],
-  },
-  {
     path: '/settings',
     component: () => import('../views/Settings.vue'),
     children: [ 
@@ -34,7 +24,23 @@ const routes = [
         component: () => import('../views/calendar/CalendarHome.vue'),
       },
     ],
-  }
+  },
+  {
+    path: '/',
+    component: Plant,
+    children: [ 
+      {
+        path: '/:garden?',
+        component: () => import('../views/plant/PlantHome.vue'),
+        // children: [
+        //   {
+        //     path: '/:module?',
+        //     component: () => import('../views/plant/PlantGarden.vue'),
+        //   },
+        // ],
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

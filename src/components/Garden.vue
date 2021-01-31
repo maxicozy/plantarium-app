@@ -22,11 +22,13 @@
     <v-row>
       <v-col cols="1"/>
       <v-col cols="11" class="text inCardTitle">
-        Module
+        Modules
       </v-col>
     </v-row>
-    <Module/>
-    <v-row>
+    <v-row class="modules">
+      <v-col cols="5" v-for="(mod, key) in allModules" :key="key" >
+        <Module :data="mod" />
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -44,10 +46,18 @@ export default {
   data: () => ({
     currentStatus: {
       backgroundColor: "#9fbf77",
-    }
+    },
   }),
   props: {
     data: Object,
+    index: Number,
+    amount: Number,
+  },
+  computed: {
+    allModules() {
+      const array = new Array(6).fill(null)
+      return array.map((_, i) => this.data.modules.find(m => m.position === i) ?? null)
+    },
   }
 }
 </script>
@@ -68,9 +78,6 @@ export default {
     border: solid white 0.075rem;
     margin: auto;
   }
-  .headPadding {
-    padding: 0.5rem;
-  }
   .inCardTitle {
     font-size: 1.125rem;
     margin-top: 1.2rem; 
@@ -79,5 +86,17 @@ export default {
   } 
   .headbar {
     background-color: #b1c3a8;
+  }
+  .headPadding {
+    padding: 0.5rem;
+  }
+  .col-5 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  }
+  .modules {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
   }
 </style>

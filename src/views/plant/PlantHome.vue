@@ -2,7 +2,9 @@
   <v-container>
     <v-row>
       <v-col cols="1">
-        <homebutton v-if="!inHome"/>
+        <homebutton 
+          v-if="!inHome"
+        />
       </v-col>
       <v-col cols="7"/>
       <v-col cols="4" class="title">
@@ -14,10 +16,10 @@
         <v-col cols="12">
           <v-row class="headbar">
             <v-col cols="1" />
-            <v-col cols="10" dense class="cardTitle" style="padding: 0.5rem">
+            <v-col cols="6" class="cardTitle headPadding">
               Economy
             </v-col>
-            <v-col cols="1"/>
+            <v-col cols="5"/>
           </v-row>
           <v-row class="economyInfoElement"> 
             <v-col cols="2"/>
@@ -42,21 +44,33 @@
         </v-col>
       </v-row>
     </div>
-      <v-carousel :min="0" hide-delimiter-background :show-arrows="false">
-        <v-carousel-item v-for="(garden, i) in gardens" :key="i">
+      <v-carousel 
+        hide-delimiters 
+        v-on:change="updateURL"
+        hide-delimiter-background 
+        :show-arrows="false" 
+        :continous="false" 
+        :value="garden"
+        :height="450">
+        
+        <v-carousel-item 
+          v-for="(garden, i) in gardens" :key="i">
+          
           <Garden
-            :data="garden"
-          />
+            :data="garden"/>
+
         </v-carousel-item>
-      </v-carousel>
+    </v-carousel>
+    <Delimiter :amount="gardens.length" :index="garden"/>
   </v-container>
 </template>
 
 <script>
-  import O2icon from '../../components/icons/O2recycle';
-  import Watericon from '../../components/icons/WaterRecycle.vue';  
-  import Homebutton from '../../components/Homebutton.vue';
-  import Garden from '../../components/Garden.vue';
+  import O2icon from '@/components/icons/O2recycle';
+  import Watericon from '@/components/icons/WaterRecycle.vue';  
+  import Homebutton from '@/components/Homebutton.vue';
+  import Garden from '@/components/Garden.vue';
+  import Delimiter from '@/components/Delimiter.vue';
 
   export default {
     name: 'Plant',
@@ -65,6 +79,7 @@
       Watericon,
       Homebutton,
       Garden,
+      Delimiter,
     },
     data: () => ({
       savedWater: 5,
@@ -80,8 +95,16 @@
           tapwater: 68,
         },
         modules: [{
-          position: 3,
+          position: 2,
           plants: "herbs",
+          status: 0,
+          plantedStamp: "27.01.2020",
+          waterConsumption: 2,
+          ph: 5.768,
+          ec: 90,
+        },{
+          position: 3,
+          plants: "rucola",
           status: 0,
           plantedStamp: "27.01.2020",
           waterConsumption: 2,
@@ -89,15 +112,7 @@
           ec: 90,
         },{
           position: 4,
-          plants: "herbs",
-          status: 0,
-          plantedStamp: "27.01.2020",
-          waterConsumption: 2,
-          ph: 5.768,
-          ec: 90,
-        },{
-          position: 5,
-          plants: "herbs",
+          plants: "magic mushrooms",
           status: 0,
           plantedStamp: "27.01.2020",
           waterConsumption: 2,
@@ -115,7 +130,15 @@
           tapwater: 68,
         },
         modules: [{
-          position: 3,
+          position: 1,
+          plants: "chilis",
+          status: 0,
+          plantedStamp: "27.01.2020",
+          waterConsumption: 2,
+          ph: 5.768,
+          ec: 90,
+        },{
+          position: 2,
           plants: "herbs",
           status: 0,
           plantedStamp: "27.01.2020",
@@ -124,7 +147,7 @@
           ec: 90,
         },{
           position: 3,
-          plants: "herbs",
+          plants: "strawberries",
           status: 0,
           plantedStamp: "27.01.2020",
           waterConsumption: 2,
@@ -132,15 +155,7 @@
           ec: 90,
         },{
           position: 4,
-          plants: "herbs",
-          status: 0,
-          plantedStamp: "27.01.2020",
-          waterConsumption: 2,
-          ph: 5.768,
-          ec: 90,
-        },{
-          position: 5,
-          plants: "herbs",
+          plants: "salad",
           status: 0,
           plantedStamp: "27.01.2020",
           waterConsumption: 2,
@@ -149,10 +164,26 @@
         }],
       }], 
     }),
+    methods: {
+      updateURL(index) {
+        const name = this.gardens[index]?.name
+        if(name) this.$router.push(`/${this.formatName(name)}`)
+      },
+      formatName(name) {
+        return name.toLowerCase().replace(/\s+/g, '-')
+      }
+    },
     computed: {
-    inHome() {
-      return this.$route.path === '/'
-    }}, 
+      inHome() {
+        return this.$route.path.match(/\//g).length < 2
+      },
+      garden() {
+        const name = this.$route.params.garden
+        return this.gardens.findIndex(g => 
+          this.formatName(g.name) === name?.toLowerCase()
+        );
+      }
+    }, 
   } 
 </script>
 
@@ -178,5 +209,8 @@
   }
   .economyInfoText {
     margin-top: 0.25rem;
+  }
+  .headPadding {
+    padding: 0.5rem;
   }
 </style>

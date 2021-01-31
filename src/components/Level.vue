@@ -1,9 +1,8 @@
 <template>
   <v-row class="info">
-    <v-col cols="4">
+    <v-col cols="5">
       {{ name }}
     </v-col>
-    <v-col cols="1" />
     <v-col cols="6">
       <div class="meterNegative">
         <div
@@ -33,7 +32,7 @@ export default {
   computed: {
     color() {
       return Object.entries(this.colors).find(
-        ([, value]) => this.level >= value)[0];
+        ([, value]) => this.level >= value)?.[0];
     },
   },
 };
@@ -52,7 +51,7 @@ export default {
   height: 9px;
   margin-top: 0.25rem;
 }
-.col-4 {
+.col-5 {
   padding: 0.5rem;
   text-transform: capitalize;
 }
