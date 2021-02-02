@@ -1,5 +1,5 @@
 <template>
-  <div class="module" :style="{ background: data ? '#b1c3a8' : 'none' }">
+  <div @click="click" class="module" :style="{ background: data ? '#b1c3a8' : 'none' }">
     <span class="info moduleInfo" v-if="data">{{ data.plants }}</span>
   </div>
 </template>
@@ -16,6 +16,19 @@ export default {
       backgroundColor: "#b1c3a8",
     }
   }),
+  methods:{
+    click() {
+      if (this.data) this.push(`/${this.garden}/${this.formatName}`);
+    },
+  },
+  computed: {
+    garden() {
+      return this.$route.params.garden;
+    },
+    formatName() {
+      return this.data.plants.toLowerCase().replace(/\s+/g, '-');
+    },
+  }
 }
 </script>
 

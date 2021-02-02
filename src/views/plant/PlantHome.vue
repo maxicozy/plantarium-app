@@ -2,12 +2,11 @@
   <v-container>
     <v-row>
       <v-col cols="1">
-        <homebutton 
-          v-if="!inHome"
+        <Homebutton 
+          v-if="inHome"
         />
       </v-col>
-      <v-col cols="7"/>
-      <v-col cols="4" class="title">
+      <v-col cols="11" class="title">
         Home
       </v-col>
     </v-row>
@@ -104,7 +103,7 @@
           ec: 90,
         },{
           position: 3,
-          plants: "rucola",
+          plants: "rocket",
           status: 0,
           plantedStamp: "27.01.2020",
           waterConsumption: 2,
@@ -175,7 +174,7 @@
     },
     computed: {
       inHome() {
-        return this.$route.path.match(/\//g).length < 2
+        return this.$route.path.match(/\//g).length < 1
       },
       garden() {
         const name = this.$route.params.garden
@@ -186,7 +185,7 @@
     }, 
   } 
 </script>
-
+        children: [
 <style scoped>
   .home {
     padding-left: 0.75rem;

@@ -2,18 +2,14 @@
   <v-container>
     <v-row>
       <v-col cols="1">
-        <homebutton 
-          v-if="!inHome"
-        />
+        <Homebutton :v-if="inHome"/>
       </v-col>
-      <v-col cols="7"/>
-      <v-col cols="4" class="title">
-        {{ }}
+      <v-col cols="11" class="title">
+        {{  }} Garden01
       </v-col>
     </v-row>
       <v-carousel 
         hide-delimiters 
-        v-on:change="updateURL"
         hide-delimiter-background 
         :show-arrows="false" 
         :continous="false" 
@@ -22,20 +18,29 @@
         
         <v-carousel-item 
           v-for="(garden, i) in gardens" :key="i">
-          
-          <Garden
-            :data="garden"/>
 
         </v-carousel-item>
     </v-carousel>
-    <Delimiter :amount="gardens.length" :index="garden"/>
+    <Delimiter :amount="gardens" :index="garden"/>
   </v-container>
 </template>
 
 <script>
+import Homebutton from '@/components/Homebutton.vue';
+import Delimiter from '@/components/Delimiter.vue';
+
 export default {
+  components: {
+    Homebutton,
+    Delimiter,
+  },
   data: () => ({
     
   }),
+  computed: {
+    inHome() {
+      return this.$route.path.match(/\//g).length < 1;
+    },
+  }
 }
 </script>

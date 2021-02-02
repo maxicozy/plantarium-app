@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     to() {
-      const [parent] = this.$route.matched;
+      const [ ,parent ] = this.$route.matched;
       return parent.path;
     }
   },
@@ -31,6 +31,7 @@ export default {
 
 <style scoped>
 .homebutton {
+  margin-top: 0.35rem;
   left: 13px;
   top: 41px;
   width: 32px;

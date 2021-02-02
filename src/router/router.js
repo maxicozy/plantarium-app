@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Plant from '../views/Plant.vue';
+import SadParent from '../views/SadParent.vue';
 
 Vue.use(VueRouter);
 
@@ -27,17 +27,25 @@ const routes = [
   },
   {
     path: '/',
-    component: Plant,
-    children: [ 
+    component: SadParent,
+    children: [
       {
-        path: '/:garden?',
+        path: '',
         component: () => import('../views/plant/PlantHome.vue'),
-        // children: [
-        //   {
-        //     path: '/:module?',
-        //     component: () => import('../views/plant/PlantGarden.vue'),
-        //   },
-        // ],
+      } ,
+      {
+        path: ':garden',
+        component: SadParent,
+        children: [
+          {
+            path: '',
+            component: () => import('../views/plant/PlantHome.vue'),
+          },
+          {
+            path: ':module',
+            component: () => import('../views/plant/PlantGarden.vue'),
+          },
+        ],
       },
     ],
   },
