@@ -26,7 +26,7 @@ export default {
       return this.$route.params.garden;
     },
     formatName() {
-      return this.data.plants.toLowerCase().replace(/\s+/g, '-');
+      return this.data.position;
     },
   }
 }

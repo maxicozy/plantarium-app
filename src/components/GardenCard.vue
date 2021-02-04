@@ -3,7 +3,7 @@
     <v-row class="headbar">
       <v-col cols="1" />
       <v-col cols="6" dense class="cardTitle headPadding">
-        {{ data.name }}
+        {{ garden.name }}
       </v-col>
       <v-col cols="2" class="text headPadding">
         Status
@@ -18,7 +18,7 @@
         Filling Levels
       </v-col>
     </v-row>
-    <Level v-for="(level, key) in data.fluidLevels" :key="key" :name="key" :level="level"/>
+    <Level v-for="(level, key) in garden.fluidLevels" :key="key" :name="key" :level="level"/>
     <v-row>
       <v-col cols="1"/>
       <v-col cols="11" class="text inCardTitle">
@@ -49,14 +49,14 @@ export default {
     },
   }),
   props: {
-    data: Object,
+    garden: Object,
     index: Number,
     amount: Number,
   },
   computed: {
     allModules() {
       const array = new Array(6).fill(null)
-      return array.map((_, i) => this.data.modules.find(m => m.position === i) ?? null)
+      return array.map((_, i) => this.garden.modules.find(m => m.position === i) ?? null)
     },
   }
 }
@@ -91,8 +91,8 @@ export default {
     padding: 0.5rem;
   }
   .col-5 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
   }
   .modules {
     margin-top: 0.5rem;

@@ -55,8 +55,7 @@
         <v-carousel-item 
           v-for="(garden, i) in gardens" :key="i">
           
-          <Garden
-            :data="garden"/>
+          <GardenCard :garden="garden"/>
 
         </v-carousel-item>
     </v-carousel>
@@ -68,7 +67,7 @@
   import O2icon from '@/components/icons/O2recycle';
   import Watericon from '@/components/icons/WaterRecycle.vue';  
   import Homebutton from '@/components/Homebutton.vue';
-  import Garden from '@/components/Garden.vue';
+  import GardenCard from '@/components/GardenCard.vue';
   import Delimiter from '@/components/Delimiter.vue';
 
   export default {
@@ -77,92 +76,145 @@
       O2icon,
       Watericon,
       Homebutton,
-      Garden,
+      GardenCard,
       Delimiter,
     },
-    data: () => ({
+    data() {
+      return {
       savedWater: 5,
       producedOxygen: 1000,
-      gardens: [{
-        name: "Garden01",
-        status: 0,
-        fluidLevels: {
-          natrium: 24,
-          phosphor: 73,
-          kalium: 54,
-          osmosiswater: 94,
-          tapwater: 68,
+      gardens: [
+          {
+          name: "Garden01",
+          status: 0,
+          fluidLevels: {
+            natrium: 24,
+            phosphor: 73,
+            kalium: 54,
+            osmosiswater: 94,
+            tapwater: 68,
+          },
+          modules: [
+            {
+              position: 2,
+              plants: "herbs",
+              status: 0,
+              plantedStamp: "27.01.2020",
+              waterLevel: this.generate(20, 1000),
+              ph: this.generate(20, 14),
+              tds: this.generate(20, 500),
+              harvestIn: "in 2 days",
+              percentGrown: "86",
+              phases: ["1st Roots", "1st Leaves", "Growing"],
+            },
+            {
+              position: 3,
+              plants: "rocket",
+              status: 0,
+              plantedStamp: "27.01.2020",
+              waterLevel: this.generate(20, 1000),
+              ph: this.generate(20, 14),
+              tds: this.generate(20, 500),
+              harvestIn: "in 1 Week",
+              percentGrown: "75",
+              phases: ["1st Roots", "1st Leaves", "Growing"],
+            },
+            {
+              position: 4,
+              plants: "chilis",
+              status: 0,
+              plantedStamp: "27.01.2020",
+              waterLevel: this.generate(20, 1000),
+              ph: this.generate(20, 14),
+              tds: this.generate(20, 500),
+              harvestIn: "in 2 Weeks",
+              percentGrown: "43",
+              phases: [
+                "1st Roots",
+                "1st Leaves",
+                "Growing",
+                "Pre-Flowering",
+                "Flowering",
+              ],
+            },
+          ],
         },
-        modules: [{
-          position: 2,
-          plants: "herbs",
+        {
+          name: "Garden02",
           status: 0,
-          plantedStamp: "27.01.2020",
-          waterConsumption: 2,
-          ph: 5.768,
-          ec: 90,
-        },{
-          position: 3,
-          plants: "rocket",
-          status: 0,
-          plantedStamp: "27.01.2020",
-          waterConsumption: 2,
-          ph: 5.768,
-          ec: 90,
-        },{
-          position: 4,
-          plants: "magic mushrooms",
-          status: 0,
-          plantedStamp: "27.01.2020",
-          waterConsumption: 2,
-          ph: 5.768,
-          ec: 90,
-        }],
-      },{
-        name: "Garden02",
-        status: 0,
-        fluidLevels: {
-          natrium: 24,
-          phosphor: 73,
-          kalium: 54,
-          osmosiswater: 94,
-          tapwater: 68,
+          fluidLevels: {
+            natrium: 24,
+            phosphor: 73,
+            kalium: 54,
+            osmosiswater: 94,
+            tapwater: 68,
+          },
+          modules: [
+            {
+              position: 1,
+              plants: "chilis",
+              status: 0,
+              plantedStamp: "27.01.2020",
+              waterLevel: this.generate(20, 1000),
+              ph: this.generate(20, 14),
+              tds: this.generate(20, 500),
+              harvestIn: "Soon",
+              percentGrown: "98",
+              phases: [
+                "1st Roots",
+                "1st Leaves",
+                "Growing",
+                "Pre-Flowering",
+                "Flowering",
+              ],
+            },
+            {
+              position: 2,
+              plants: "herbs",
+              status: 0,
+              plantedStamp: "27.01.2020",
+              waterLevel: this.generate(20, 1000),
+              ph: this.generate(20, 14),
+              tds: this.generate(20, 500),
+              harvestIn: "Constantly",
+              percentGrown: "100",
+              phases: ["1st Roots", "1st Leaves", "Growing"],
+            },
+            {
+              position: 3,
+              plants: "strawberries",
+              status: 0,
+              plantedStamp: "27.01.2020",
+              waterLevel: this.generate(20, 1000),
+              ph: this.generate(20, 14),
+              tds: this.generate(20, 500),
+              harvestIn: "in 4 Weeks",
+              percentGrown: "7",
+              phases: [
+                "1st Roots",
+                "1st Leaves",
+                "Growing",
+                "Pre-Flowering",
+                "Flowering",
+              ],
+            },
+            {
+              position: 4,
+              plants: "salad",
+              status: 0,
+              plantedStamp: "27.01.2020",
+              waterLevel: this.generate(20, 1000),
+              ph: this.generate(20, 14),
+              tds: this.generate(20, 500),
+              harvestIn: "Constantly",
+              percentGrown: "100",
+              phases: ["1st Roots", "1st Leaves", "Growing"],
+            },
+          ],
         },
-        modules: [{
-          position: 1,
-          plants: "chilis",
-          status: 0,
-          plantedStamp: "27.01.2020",
-          waterConsumption: 2,
-          ph: 5.768,
-          ec: 90,
-        },{
-          position: 2,
-          plants: "herbs",
-          status: 0,
-          plantedStamp: "27.01.2020",
-          waterConsumption: 2,
-          ph: 5.768,
-          ec: 90,
-        },{
-          position: 3,
-          plants: "strawberries",
-          status: 0,
-          plantedStamp: "27.01.2020",
-          waterConsumption: 2,
-          ph: 5.768,
-          ec: 90,
-        },{
-          position: 4,
-          plants: "salad",
-          status: 0,
-          plantedStamp: "27.01.2020",
-          waterConsumption: 2,
-          ph: 5.768,
-          ec: 90,
-        }],
-      }], 
-    }),
+      ],
+    }
+  },
     methods: {
       updateURL(index) {
         const name = this.gardens[index]?.name
@@ -170,7 +222,13 @@
       },
       formatName(name) {
         return name.toLowerCase().replace(/\s+/g, '-')
-      }
+      },
+      generate(size, max) {
+      const start = new Date().getTime();
+      return new Array(size).fill(null).map((_, i) => ({
+        time: new Date(start + 1000 * 60 * 60 * i).toString(),
+        value: Math.random() * max,}));
+      },
     },
     computed: {
       inHome() {
@@ -179,13 +237,11 @@
       garden() {
         const name = this.$route.params.garden
         return this.gardens.findIndex(g => 
-          this.formatName(g.name) === name?.toLowerCase()
-        );
+          this.formatName(g.name) === name?.toLowerCase());
       }
     }, 
   } 
 </script>
-        children: [
 <style scoped>
   .home {
     padding-left: 0.75rem;

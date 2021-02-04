@@ -35,7 +35,8 @@ export default {
   left: 13px;
   top: 41px;
   width: 32px;
-  border-radius: 10px;
+  border-radius: 0.625rem;
+  overflow: hidden;
   text-align: left;
   position: absolute;
 }
