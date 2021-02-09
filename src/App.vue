@@ -24,6 +24,7 @@
       }
     }),
     computed: {
+      //gleicht den ausgewählten tab der navbar an an die aktuelle route an
       value() {
         const [parent] = this.$route.matched
         const current = parent?.path?.substring(1)

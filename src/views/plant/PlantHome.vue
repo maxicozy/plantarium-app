@@ -227,7 +227,7 @@
       const start = new Date().getTime();
       return new Array(size).fill(null).map((_, i) => ({
         time: new Date(start + 1000 * 60 * 60 * i).toString(),
-        value: Math.random() * max,}));
+        value: Math.random() * max, }));
       },
     },
     computed: {
