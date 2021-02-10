@@ -22,7 +22,7 @@ export default {
     max-width: 0;
   }
   .delimiter {
-    margin: 1.25rem 0.25rem;
+    margin: 1.5rem 0.25rem;
     padding: 0.25rem;
     height: 0.5rem;
     width: 0.5rem;

@@ -1,7 +1,7 @@
 <template>
   <div ref="container">
     
-    <span class="value info">{{ value }}</span>
+    <span class="value info">{{ display }}</span>
     <span 
       class="part info"
       v-for="([x, y], i) in parts"
@@ -29,39 +29,47 @@
 <script>
 export default {
     computed: {
+      percentage() {
+        // Clamp the given value
+        return Math.max(0, Math.min(1, this.value))
+      },
       circumference() {
         return 2 * 3.14 * this.radius
       },
-      strokeLength() {
-          return this.circumference * this.percentage
-      },
-      value() {
+      display() {
         return this.text ?? Math.floor(this.percentage * 100)
       },
       radius() {
         return this.size / 3.7;
       },
       parts() {
+        // The small indezes around the circle
         return new Array(this.segments).fill(null).map((_, i, a) =>
           this.polar(i / a.length, 0.7)
         )
       },
       arc() {
+        // Calculates the circle part which should be conceiled
         const arcSweep = this.percentage >= 0.5 ? 0 : 1;
         const radius = 0.8;
         const [start, end] = [1, this.percentage].map(i => i - 0.098).map(deg => 
           this.polar(deg, radius).map(i => (i / 100) * this.size))
 
         return [
-          "M", start[0], start[1], 
+          // Start point
+          "M", start[0], start[1],
+          // Arc alongside the circle 
           "A", radius * (this.size / 2), radius * (this.size / 2), 0, arcSweep, 0, end[0], end[1],
+          // Point in circle center
           "L", this.size / 2, this.size / 2,
+          // End point
           "L", start[0], start[1]
         ].join(" ");
       }
     },
     methods: {
       polar(percentage, scale = 1) {
+        // Polar coordinates using sin/cos from cartesian coordinates
         return [Math.cos, Math.sin]
             .map(fn => fn((percentage - 0.15) * Math.PI * 2))
             .map(i => i * 50 * scale)
@@ -73,14 +81,14 @@ export default {
       size: null,
     }),
     props: {
-      percentage: Number,
+      value: Number,
       segments: Number,
       text: String,
     },
     mounted() {
       setTimeout(() => {
         this.size = this.$refs.container.offsetWidth
-      }, 50)
+      }, 100)
     }
 }
 </script>
@@ -103,7 +111,8 @@ span {
 }
 
 .value {
-  top: 50%;
+  top: 48.5%;
   left: 50%;
+  margin-bottom: 0.5rem;
 }
 </style>

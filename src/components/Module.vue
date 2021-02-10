@@ -1,22 +1,21 @@
 <template>
   <div @click="click" class="module" :style="{ background: data ? '#b1c3a8' : 'none' }">
-    <span class="info moduleInfo" v-if="data">{{ data.plants }}</span>
+    <span class="info moduleInfo" v-if="data">{{ data.plant }}</span>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "Module",
   props: {
-    data: Object
+    data: Object,
   },
   data: () => ({
     activeColor: {
       backgroundColor: "#b1c3a8",
-    }
+    },
   }),
-  methods:{
+  methods: {
     click() {
       if (this.data) this.push(`/${this.garden}/${this.formatName}`);
     },
@@ -28,8 +27,8 @@ export default {
     formatName() {
       return this.data.position;
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -43,5 +42,4 @@ export default {
 .moduleInfo {
   text-transform: capitalize;
 }
-
 </style>

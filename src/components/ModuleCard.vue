@@ -3,7 +3,7 @@
     <v-row class="headbar">
       <v-col cols="1" />
       <v-col cols="6" class="cardTitle headPadding">
-        {{ data.plants }}
+        {{ data.plant }}
       </v-col>
       <v-col cols="2" class="text headPadding">
         Status
@@ -13,7 +13,7 @@
       </v-col>
     </v-row>
     
-    <v-row class="content" align="center">
+    <v-row v-if="data.phases" class="content" align="center">
       <v-col cols="1"/>
       <v-col cols="4" class="list">
         <p class="text inCardTitle">Phases</p>
@@ -23,10 +23,16 @@
       </v-col>
       <v-col cols="7">
         <pie-chart 
-          :percentage="data.percentGrown/100" 
+          :value="data.percentGrown" 
           :segments="data.phases.length" 
           :text="`Harvest ${data.harvestIn}`" 
         />
+      </v-col>
+    </v-row>
+
+    <v-row v-else>
+      <v-col cols="12">
+        <p class="info smoothOnLoad"> Keine Daten verfügbar</p>
       </v-col>
     </v-row>
 
@@ -51,12 +57,6 @@ export default {
     index: Number,
     amount: Number,
   },
-  computed: {
-    allModules() {
-      const array = new Array(6).fill(null)
-      return array.map((_, i) => this.data.modules.find(m => m.position === i) ?? null)
-    },
-  }
 }
 </script>
 

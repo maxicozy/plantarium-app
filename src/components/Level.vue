@@ -1,9 +1,9 @@
 <template>
   <v-row class="info">
-    <v-col cols="5">
+    <v-col cols="4">
       {{ name }}
     </v-col>
-    <v-col cols="6">
+    <v-col cols="7">
       <div class="meterNegative">
         <div
           class="meter"
@@ -51,11 +51,11 @@ export default {
   height: 9px;
   margin-top: 0.25rem;
 }
-.col-5 {
+.col-4 {
   padding: 0.5rem;
   text-transform: capitalize;
 }
-.col-6 {
+.col-7 {
   padding: 0.5rem;
   justify-content: left;
 }

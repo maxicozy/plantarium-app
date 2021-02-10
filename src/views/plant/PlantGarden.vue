@@ -1,11 +1,11 @@
 <template>
-  <v-container>
+  <v-container v-if="garden">
     <v-row>
       <v-col cols="1">
         <Homebutton :v-if="inHome" />
       </v-col>
       <v-col cols="11" class="title">
-        {{ gardens[garden].name }}
+        {{ garden.name }}
       </v-col>
     </v-row>
     <v-carousel
@@ -17,12 +17,12 @@
       :value="mod"
       :height="642"
     >
-      <v-carousel-item v-for="(mod, i) in gardens[garden].modules" :key="i">
+      <v-carousel-item v-for="(mod, i) in garden.modules" :key="i">
         <ModuleCard :data="mod" />
-        <StatisticCard :data="mod" />
+        <StatisticCard />
       </v-carousel-item>
     </v-carousel>
-    <Delimiter :amount="gardens[garden].modules.length" :index="mod" />
+    <Delimiter :amount="garden.modules.length" :index="mod" />
   </v-container>
 </template>
 
@@ -41,142 +41,20 @@ export default {
   },
   data() {
     return {
-      gardens: [
-        {
-          name: "Garden01",
-          status: 0,
-          fluidLevels: {
-            natrium: 24,
-            phosphor: 73,
-            kalium: 54,
-            osmosiswater: 94,
-            tapwater: 68,
-          },
-          modules: [
-            {
-              position: 2,
-              plants: "herbs",
-              status: 0,
-              plantedStamp: "27.01.2020",
-              waterLevel: this.generate(20, 1000),
-              ph: this.generate(20, 14),
-              tds: this.generate(20, 500),
-              harvestIn: "in 2 days",
-              percentGrown: "86",
-              phases: ["1st Roots", "1st Leaves", "Growing"],
-            },
-            {
-              position: 3,
-              plants: "rocket",
-              status: 0,
-              plantedStamp: "27.01.2020",
-              waterLevel: this.generate(20, 1000),
-              ph: this.generate(20, 14),
-              tds: this.generate(20, 500),
-              harvestIn: "in 1 Week",
-              percentGrown: "75",
-              phases: ["1st Roots", "1st Leaves", "Growing"],
-            },
-            {
-              position: 4,
-              plants: "chilis",
-              status: 0,
-              plantedStamp: "27.01.2020",
-              waterLevel: this.generate(20, 1000),
-              ph: this.generate(20, 14),
-              tds: this.generate(20, 500),
-              harvestIn: "in 2 Weeks",
-              percentGrown: "43",
-              phases: [
-                "1st Roots",
-                "1st Leaves",
-                "Growing",
-                "Pre-Flowering",
-                "Flowering",
-              ],
-            },
-          ],
-        },
-        {
-          name: "Garden02",
-          status: 0,
-          fluidLevels: {
-            natrium: 24,
-            phosphor: 73,
-            kalium: 54,
-            osmosiswater: 94,
-            tapwater: 68,
-          },
-          modules: [
-            {
-              position: 1,
-              plants: "chilis",
-              status: 0,
-              plantedStamp: "27.01.2020",
-              waterLevel: this.generate(20, 1000),
-              ph: this.generate(20, 14),
-              tds: this.generate(20, 500),
-              harvestIn: "Soon",
-              percentGrown: "98",
-              phases: [
-                "1st Roots",
-                "1st Leaves",
-                "Growing",
-                "Pre-Flowering",
-                "Flowering",
-              ],
-            },
-            {
-              position: 2,
-              plants: "herbs",
-              status: 0,
-              plantedStamp: "27.01.2020",
-              waterLevel: this.generate(20, 1000),
-              ph: this.generate(20, 14),
-              tds: this.generate(20, 500),
-              harvestIn: "Constantly",
-              percentGrown: "100",
-              phases: ["1st Roots", "1st Leaves", "Growing"],
-            },
-            {
-              position: 3,
-              plants: "strawberries",
-              status: 0,
-              plantedStamp: "27.01.2020",
-              waterLevel: this.generate(20, 1000),
-              ph: this.generate(20, 14),
-              tds: this.generate(20, 500),
-              harvestIn: "in 4 Weeks",
-              percentGrown: "7",
-              phases: [
-                "1st Roots",
-                "1st Leaves",
-                "Growing",
-                "Pre-Flowering",
-                "Flowering",
-              ],
-            },
-            {
-              position: 4,
-              plants: "salad",
-              status: 0,
-              plantedStamp: "27.01.2020",
-              waterLevel: this.generate(20, 1000),
-              ph: this.generate(20, 14),
-              tds: this.generate(20, 500),
-              harvestIn: "Constantly",
-              percentGrown: "100",
-              phases: ["1st Roots", "1st Leaves", "Growing"],
-            },
-          ],
-        },
-      ],
+      garden: null,
     };
   },
   methods: {
+    fetch() { 
+      const id = this.$route.params.garden
+      this.$api.get(`garden/${id}`)
+        .then(r => r.data)
+        .then(g => this.garden = g)
+        .catch(e => console.error(e))
+    },
     updateURL(index) {
-      const position = this.gardens[this.garden].modules[index]?.position;
-      const name = this.gardens[this.garden]?.name;
+      const position = this.garden.modules[index]?.position;
+      const name = this.garden?.name;
       if (name) this.$router.push(`/${this.formatName(name)}/${position}`);
     },
     formatName(name) {
@@ -194,15 +72,9 @@ export default {
     inHome() {
       return this.$route.path.match(/\//g).length < 1;
     },
-    garden() {
-      const name = this.$route.params.garden;
-      return this.gardens.findIndex(
-        (g) => this.formatName(g.name) === name?.toLowerCase()
-      );
-    },
     mod() {
       const position = Number.parseInt(this.$route.params.module);
-      return this.gardens[this.garden].modules.findIndex(
+      return this.garden.modules.findIndex(
         (m) => m.position === position
       );
     },

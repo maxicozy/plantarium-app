@@ -1,5 +1,6 @@
 <template>
   <div class="gardenCard">
+    
     <v-row class="headbar">
       <v-col cols="1" />
       <v-col cols="6" dense class="cardTitle headPadding">
@@ -12,24 +13,32 @@
         <div class="status" :style="currentStatus"/>
       </v-col>
     </v-row>
+    
     <v-row>
       <v-col cols="1"/>
       <v-col cols="11" class="text inCardTitle">
         Filling Levels
       </v-col>
     </v-row>
-    <Level v-for="(level, key) in garden.fluidLevels" :key="key" :name="key" :level="level"/>
+    
+    <template v-if="garden.fluidLevels">
+      <Level v-for="(level, key) in garden.fluidLevels" :key="key" :name="key" :level="level"/>
+    </template>
+    <p v-else>Du hast kein Düngermodul spast</p>
+
     <v-row>
       <v-col cols="1"/>
       <v-col cols="11" class="text inCardTitle">
         Modules
       </v-col>
     </v-row>
+    
     <v-row class="modules">
       <v-col cols="5" v-for="(mod, key) in allModules" :key="key" >
         <Module :data="mod" />
       </v-col>
     </v-row>
+
   </div>
 </template>
 
