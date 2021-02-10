@@ -1,4 +1,5 @@
 <template>
+  <!-- platzhalter aktuell -->
   <div class="container">
     <router-view />
   </div>

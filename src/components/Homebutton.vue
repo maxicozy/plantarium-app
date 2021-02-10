@@ -21,6 +21,7 @@ export default {
 
   },
   computed: {
+    //this.$route.matched ist ein array und wir rufen darin den parent path auf und geben ihn zurück
     to() {
       const [ ,parent ] = this.$route.matched;
       return parent.path;
@@ -40,6 +41,7 @@ export default {
   text-align: left;
   position: absolute;
 }
+/* vuetify umgestalten un überschreiben*/
 .homebutton .v-btn:not(.v-btn--round).v-size--default {
   min-width: 0;
   padding-right: 9px;

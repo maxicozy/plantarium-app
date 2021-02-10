@@ -8,6 +8,7 @@
         {{ garden.name }}
       </v-col>
     </v-row>
+
     <v-carousel
       hide-delimiters
       hide-delimiter-background
@@ -22,7 +23,9 @@
         <StatisticCard />
       </v-carousel-item>
     </v-carousel>
+
     <Delimiter :amount="garden.modules.length" :index="mod" />
+
   </v-container>
 </template>
 
@@ -45,33 +48,32 @@ export default {
     };
   },
   methods: {
+    //definiert was bei fetch in dieser komponente passieren soll
+    //holt daten vom GET /api/garden/:name endpoint
     fetch() { 
-      const id = this.$route.params.garden
-      this.$api.get(`garden/${id}`)
+      const name = this.$route.params.garden
+      this.$api.get(`garden/${name}`)
         .then(r => r.data)
         .then(g => this.garden = g)
         .catch(e => console.error(e))
     },
+    //wird dem carousel mitgegeben, updatet die route beim swipen zum neuen Modul im Garten
     updateURL(index) {
       const position = this.garden.modules[index]?.position;
       const name = this.garden?.name;
       if (name) this.$router.push(`/${this.formatName(name)}/${position}`);
     },
+    //formatiert den gartennamen, damit man aus ihm eine url machen kann
     formatName(name) {
       return name.toLowerCase().replace(/\s+/g, "-");
     },
-    generate(size, max) {
-      const start = new Date().getTime();
-      return new Array(size).fill(null).map((_, i) => ({
-        time: new Date(start + 1000 * 60 * 60 * i).toString(),
-        value: Math.random() * max,
-      }));
-    },
   },
   computed: {
+    //schaut ob mehr als ein "/" in der aktuellen route angezeigt wird, falls ja wird im template der homebutton gerendert 
     inHome() {
       return this.$route.path.match(/\//g).length < 1;
     },
+    //bestimmt die position des aktuell ausgewählten moduls anhand des aktuellen routenparameters
     mod() {
       const position = Number.parseInt(this.$route.params.module);
       return this.garden.modules.findIndex(

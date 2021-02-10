@@ -16,14 +16,17 @@ export default {
     },
   }),
   methods: {
+    //falls es daten in diesem modulfeld gibt wird zu einer neuen route gepusht die die position des aktuellen moduls hintendran hat
     click() {
       if (this.data) this.push(`/${this.garden}/${this.formatName}`);
     },
   },
   computed: {
+    //wird hier nur genutzt um das Modul an die bereits bestehende Gartenroute anzuhängen
     garden() {
       return this.$route.params.garden;
     },
+    //hier wird die route um ein modul erweitert, daher muss formatName() hier nur die Position des Moduls zurückgeben
     formatName() {
       return this.data.position;
     },

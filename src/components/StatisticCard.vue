@@ -1,5 +1,6 @@
 <template>
   <div class="statisticCard">
+
     <v-row class="headbar">
       <v-col cols="1" />
       <v-col cols="5" class="cardTitle headPadding">
@@ -17,6 +18,7 @@
         </v-col>
         <v-col cols="1"/>
       </v-row>
+      
       <v-row>
         <v-col cols="1"/>
           <div class="line"/>
@@ -36,6 +38,7 @@
         </v-col>
         <v-col cols="1" />
       </v-row>
+
       <v-row>
         <v-col cols="1"/>
         <v-col cols="10">

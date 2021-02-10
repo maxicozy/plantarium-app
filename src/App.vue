@@ -1,12 +1,18 @@
 <template>
   <div id="app">
+
     <statusbar />
+
     <router-view />
+
     <v-bottom-navigation fixed dark class="unselectable" :value="value" absolute grow height="51px" background-color=#c9d8e4>
+
       <v-btn v-for="(icon, path) in pages" :key="path" @click="push('/' + path)" icon elevation="0">
         <v-icon size="32">{{ icon }}</v-icon>
       </v-btn>
+
     </v-bottom-navigation>
+
   </div>
 </template>
 
@@ -32,6 +38,7 @@
       }
     },
     components: {
+      //die statusbar ist nur ein kleiner platzhalter damit die ersten elemente nicht unter der uhrzeit anfangen
       Statusbar,
     },
   }

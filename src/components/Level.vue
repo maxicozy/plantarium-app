@@ -30,6 +30,8 @@ export default {
     },
   }),
   computed: {
+    //durchsucht color object nach schlüssel & wertpaar bei dem wert kleiner als momentanes level
+    //gibt davon farbe also schlüssel zurück
     color() {
       return Object.entries(this.colors).find(
         ([, value]) => this.level >= value)?.[0];

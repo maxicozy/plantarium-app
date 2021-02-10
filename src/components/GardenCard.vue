@@ -24,7 +24,7 @@
     <template v-if="garden.fluidLevels">
       <Level v-for="(level, key) in garden.fluidLevels" :key="key" :name="key" :level="level"/>
     </template>
-    <p v-else>Du hast kein Düngermodul spast</p>
+    <p v-else>No Fertilizer Module Added</p>
 
     <v-row>
       <v-col cols="1"/>
@@ -63,6 +63,7 @@ export default {
     amount: Number,
   },
   computed: {
+    //erstellt ein array mit der maximalen anzahl von modulen als leere einträge und fügt an den positionen an denen module sind diese ein
     allModules() {
       const array = new Array(6).fill(null)
       return array.map((_, i) => this.garden.modules.find(m => m.position === i) ?? null)

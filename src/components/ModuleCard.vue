@@ -22,7 +22,7 @@
         </ol>
       </v-col>
       <v-col cols="7">
-        <pie-chart 
+        <PieChart 
           :value="data.percentGrown" 
           :segments="data.phases.length" 
           :text="`Harvest ${data.harvestIn}`" 

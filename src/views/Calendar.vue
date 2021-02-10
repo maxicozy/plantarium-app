@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <!-- platzhalter aktuell -->
     <p class="heading">Calendar</p>
     <p>This is the Calendar screen</p>
   </div>

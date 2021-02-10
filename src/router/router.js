@@ -4,6 +4,7 @@ import SadParent from '../views/SadParent.vue';
 
 Vue.use(VueRouter);
 
+//definiert alle routen der app
 const routes = [
   {
     path: '/settings',
@@ -26,6 +27,7 @@ const routes = [
     ],
   },
   {
+    //im parent wird entweder einfach planthome gerendert mit dem ersten gefundenen garten wenn kein weiterer pfad angegeben wird
     path: '/',
     component: SadParent,
     children: [
@@ -34,6 +36,7 @@ const routes = [
         component: () => import('../views/plant/PlantHome.vue'),
       } ,
       {
+        //oder, wenn ein pfad angegeben wird dann wird trotzdem das parent gerendert aber diesmal mit planthome darin und mit einem bestimmten garten 
         path: ':garden',
         component: SadParent,
         children: [
