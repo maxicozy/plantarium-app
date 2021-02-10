@@ -18,7 +18,7 @@
         </v-col>
         <v-col cols="1"/>
       </v-row>
-      
+
       <v-row>
         <v-col cols="1"/>
           <div class="line"/>
@@ -71,6 +71,8 @@ export default {
   }),
   methods: {
     fetch() {
+    //definiert was bei fetch in dieser komponente passieren soll
+    //holt daten vom GET /api/garden/:name/:position/sensordata endpoint
       const { garden, module } = this.$route.params
       this.$api.get(`garden/${garden}/${module}/sensordata`)
         .then(({ data }) => this.data = data)
@@ -78,7 +80,9 @@ export default {
     }
   },
   computed: {
+
     stats() {
+      //gibt ein array zurück in dem für jeden der 3 sensortypen ein array mit den jeweiligen werten steckt
       const frames = ['waterLevel', 'ph', 'tds']
       return frames.map(type => 
         this.data
@@ -87,6 +91,7 @@ export default {
           ?? []
       ).filter(f => f.length > 0)
     },
+    //gibt das datum des letzten sensorwerts zurück falls eins gefunden werden kann
     date() {
       const date = this.data[this.data.length - 1]?.time
       return date ? new Date(date).toLocaleDateString('de-DE') : 'Kein Datum'
