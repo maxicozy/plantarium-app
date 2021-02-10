@@ -65,6 +65,7 @@
     text-align: center;
     color: #515151;
   }
+  /* hier werden unsere verschiedenen schriftgrößen & schnitte definiert*/
   .headbar {
     border-top-left-radius: 0.313rem;
     border-top-right-radius: 0.313rem;
@@ -93,6 +94,7 @@
     font-family: 'AvenirLTStd-Light', sans-serif;
     font-size: 0.875rem;
   }
+  /* und hier gestalten wir vuetify ein wenig um */
   .unselectable .theme--dark.v-btn:hover::before {
     opacity: 0;
   }
