@@ -30,7 +30,7 @@
 export default {
     computed: {
       percentage() {
-        // Clamp the given value
+        //Definiert minimum und maximum des werts
         return Math.max(0, Math.min(1, this.value))
       },
       circumference() {
@@ -43,33 +43,33 @@ export default {
         return this.size / 3.7;
       },
       parts() {
-        // The small indezes around the circle
+        //dashier macht die kleinen einkerbungen im winkel
         return new Array(this.segments).fill(null).map((_, i, a) =>
           this.polar(i / a.length, 0.7)
         )
       },
       arc() {
-        // Calculates the circle part which should be conceiled
+        //berechnet den ausschnitt des kreises der nicht angezeigt werden soll
         const arcSweep = this.percentage >= 0.5 ? 0 : 1;
         const radius = 0.8;
         const [start, end] = [1, this.percentage].map(i => i - 0.098).map(deg => 
           this.polar(deg, radius).map(i => (i / 100) * this.size))
 
         return [
-          // Start point
+          // startpunkt
           "M", start[0], start[1],
-          // Arc alongside the circle 
+          // bogen das aussenstück des kreisabschnitts formt
           "A", radius * (this.size / 2), radius * (this.size / 2), 0, arcSweep, 0, end[0], end[1],
-          // Point in circle center
+          // punkt in der mitte des kreises
           "L", this.size / 2, this.size / 2,
-          // End point
+          // endpunkt
           "L", start[0], start[1]
         ].join(" ");
       }
     },
     methods: {
       polar(percentage, scale = 1) {
-        // Polar coordinates using sin/cos from cartesian coordinates
+        //karthesische koordinaten aus polarkoordinaten  berechnen
         return [Math.cos, Math.sin]
             .map(fn => fn((percentage - 0.15) * Math.PI * 2))
             .map(i => i * 50 * scale)
